@@ -1,38 +1,40 @@
-import {useState} from "react";
+import React from "react";
 
-function searchBar({onSearch, loading})
-{
-    const [query, setQuery] = useState("");
+import { useState } from "react";
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+function SearchBar({ onSearch, loading }) {
+  const [query, setQuery] = useState("");
 
-        if(!query.trim())
-        {
-            return;
-        }
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-        onSearch(query);
-    };
+    if (!query.trim()) {
+      return;
+    }
 
-    return
-    {
-        <form className = "search-container" onSubnit = {handleSubmit}>
-            <input 
-            type = "text"
+    onSearch(query.trim());
+  };
 
-            placeholder = "Search for a movie..."
+  return (
+    <form
+      className="search-container"
+      onSubmit={handleSubmit}
+    >
+      <input
+        type="text"
+        placeholder="Search for a movie..."
+        value={query}
+        onChange={(event) => setQuery(event.target.value)}
+      />
 
-            value = {query}
-
-            onChange = {(event) => setQuery(event.target.value)}
-            />
-
-            <button type = "submit" disabled = {loading}>
-                {loading ? "Searching..." : "Search"}
-            </button>
-        </form>
-    };
+      <button
+        type="submit"
+        disabled={loading}
+      >
+        {loading ? "Searching..." : "Search"}
+      </button>
+    </form>
+  );
 }
 
-export default searchBar;
+export default SearchBar;
