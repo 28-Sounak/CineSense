@@ -1,3 +1,5 @@
+import React from "react";
+
 function MovieCard({ movie, onSelect, rank }) {
   const score =
     movie.hybrid_score ??
